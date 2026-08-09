@@ -1,0 +1,8 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- 封筒 -->
+<rect x="8" y="16" width="48" height="32" rx="4" stroke="#E77084" stroke-width="2.5" fill="none"/>
+<path d="M8 20L32 38L56 20" stroke="#E77084" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<!-- チェックマーク円 -->
+<circle cx="48" cy="44" r="11" fill="#E77084"/>
+<path d="M42.5 44L46.5 48L54 40.5" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
