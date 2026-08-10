@@ -373,40 +373,9 @@ function yuumi_structured_data() {
 }
 add_action('wp_head', 'yuumi_structured_data', 6);
 
-// --- Breadcrumbs ---
+// --- Breadcrumbs (無効化) ---
 function yuumi_breadcrumbs() {
-    if (is_front_page()) return;
-
-    echo '<nav class="breadcrumbs" aria-label="パンくずリスト">';
-    echo '<div class="container">';
-    echo '<a href="' . esc_url(home_url('/')) . '">TOP</a>';
-
-    if (is_page()) {
-        $ancestors = get_post_ancestors(get_the_ID());
-        foreach (array_reverse($ancestors) as $ancestor) {
-            echo ' <span class="breadcrumbs__sep">&gt;</span> ';
-            echo '<a href="' . get_permalink($ancestor) . '">' . get_the_title($ancestor) . '</a>';
-        }
-        echo ' <span class="breadcrumbs__sep">&gt;</span> ';
-        echo '<span>' . get_the_title() . '</span>';
-    } elseif (is_single()) {
-        $cats = get_the_category();
-        if ($cats) {
-            echo ' <span class="breadcrumbs__sep">&gt;</span> ';
-            echo '<a href="' . get_category_link($cats[0]->term_id) . '">' . $cats[0]->name . '</a>';
-        }
-        echo ' <span class="breadcrumbs__sep">&gt;</span> ';
-        echo '<span>' . get_the_title() . '</span>';
-    } elseif (is_archive()) {
-        echo ' <span class="breadcrumbs__sep">&gt;</span> ';
-        echo '<span>' . get_the_archive_title() . '</span>';
-    } elseif (is_search()) {
-        echo ' <span class="breadcrumbs__sep">&gt;</span> ';
-        echo '<span>検索結果</span>';
-    }
-
-    echo '</div>';
-    echo '</nav>';
+    return;
 }
 
 // --- Contact Form 7 Helper ---

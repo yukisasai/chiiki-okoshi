@@ -178,7 +178,7 @@
           </div>
         </a>
 
-        <a href="<?php echo esc_url(home_url('/program/')); ?>" class="svc-card svc-card--green">
+        <a href="<?php echo esc_url(home_url('/chiiki-support/')); ?>" class="svc-card svc-card--green">
           <div class="svc-card__img">
             <img src="<?php echo yuumi_img('svc-program.png'); ?>" alt="地域おこし協力隊サポート" loading="lazy">
           </div>
