@@ -371,7 +371,7 @@
             <div class="faq-item-new__answer" style="max-height:200px;">
               <div class="faq-item-new__a-inner">
                 <span class="faq-item-new__a-label">A</span>
-                <div class="faq-item-new__a-text">回答テキストが入ります。サービスごとの詳しいQ&amp;Aは、よくある質問ページにまとめています。</div>
+                <div class="faq-item-new__a-text">サービスごとの詳しいQ&amp;Aは、よくある質問ページにまとめています。</div>
               </div>
             </div>
           </div>

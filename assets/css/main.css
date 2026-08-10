@@ -9595,7 +9595,7 @@ body {
 
 /* --- FAQ Section (New) --- */
 .section--faq {
-  padding: 4rem 0 5rem;
+  padding: 4rem 0 0;
   background: #fff;
 }
 
@@ -9974,16 +9974,16 @@ body {
     font-size: 15px;
   }
 
-  .home .section--contact-cta {
-    padding-bottom: 2rem;
-  }
-
   .section--services {
     background: #fdf3f4;
   }
 }
 
 @media (max-width: 480px) {
+  .home .section--contact-cta {
+    padding-bottom: 2rem;
+  }
+
   /* --- Hero FV SP Layout --- */
   .hero-fv__parts {
     height: 135vw;
