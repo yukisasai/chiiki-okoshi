@@ -32,7 +32,7 @@ get_header(); ?>
           地域おこし協力隊は、地域に移り住み、そこに暮らす人たちと関わりながら、地域の活動や課題に取り組む制度です。活動内容は地域によってさまざまで、情報発信、観光、移住定住、産業支援、地域づくりなど、その地域に必要な役割を担います。活動を通して地域との関係を深めながら、隊員自身もその地域での暮らし方や働き方を少しずつ形にしていくことができます。
         </p>
         <a href="https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/02gyosei08_03000066.html" class="cs-about__btn" target="_blank" rel="noopener noreferrer">
-          地域おこし協力隊について詳しくは<br class="br-sp">こちら（総務省）
+          地域おこし協力隊について<br class="br-sp">詳しくはこちら（総務省）
           <img src="<?php echo yuumi_img('arrow-external-white.svg'); ?>" alt="" width="17" height="17" aria-hidden="true">
         </a>
       </div>

@@ -407,6 +407,15 @@ function yuumi_cf7_privacy_link($content) {
 }
 add_filter('wpcf7_form_elements', 'yuumi_cf7_privacy_link');
 
+// Fix CF7 form output: remove line breaks inside HTML tags to prevent broken class names
+function yuumi_fix_cf7_line_breaks($content) {
+    $content = preg_replace_callback('/<[^>]+>/', function($match) {
+        return preg_replace('/\s+/', ' ', $match[0]);
+    }, $content);
+    return $content;
+}
+add_filter('wpcf7_form_elements', 'yuumi_fix_cf7_line_breaks', 5);
+
 // --- Auto-create CF7 form & Privacy Policy page on theme setup ---
 function yuumi_setup_contact_form() {
     // Skip if CF7 not active

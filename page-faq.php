@@ -240,7 +240,7 @@ get_header(); ?>
 
       <!-- Contact CTA -->
       <div class="faq-cta">
-        <h2 class="faq-cta__title">解決しない場合は、お気軽にお問い合わせください</h2>
+        <h2 class="faq-cta__title">解決しない場合は、<br class="br-sp">お気軽にお問い合わせください</h2>
         <p class="faq-cta__text">メール・お問い合わせフォーム・Instagram からご連絡いただけます。</p>
         <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="faq-cta__btn">
           お問い合わせフォームはこちら

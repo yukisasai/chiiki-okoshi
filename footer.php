@@ -16,6 +16,9 @@
           <p>青森県十和田市</p>
           <p>代表：渡邊ゆうみ</p>
           <p>yuutumugi.design@gmail.com</p>
+          <?php if ( is_page(['otameshi', 'chiiki-support', 'program']) ) : ?>
+            <p style="font-size: 0.85em;">主催：<a href="https://www.city.towada.lg.jp/kurashi/ijuu/index.html" target="_blank" rel="noopener noreferrer">十和田市役所みらい戦略部 シティプロモーション課</a></p>
+          <?php endif; ?>
         </div>
       </div>
 

@@ -282,7 +282,7 @@
   }
 
   // --- Hero FV Entrance Animation ---
-  // 写真が反時計回りにふわっとフェードイン → SVG線が糸を結ぶように描画
+  // 写真→糸→写真→糸…と交互に表示し、最後に赤・緑の糸で締めくくる
   (function () {
     var hero = document.querySelector('.hero-fv');
     if (!hero) return;
@@ -290,101 +290,147 @@
 
     hero.classList.add('hero-fv--animate');
 
-    // 写真: 反時計回り (右上→左上→左中→左下→右下→右中)
-    var photoOrder = [
-      '.hero-fv__photo--tr',
-      '.hero-fv__photo--tl',
-      '.hero-fv__photo--ml',
-      '.hero-fv__photo--bl',
-      '.hero-fv__photo--br',
-      '.hero-fv__photo--mr'
-    ];
-
-    // SVG線: 反時計回り
-    var lineOrder = [
-      '.hero-fv__line--blue',
-      '.hero-fv__line--pink',
-      '.hero-fv__line--green',
-      '.hero-fv__line--yellow'
-    ];
+    // シーケンス:
+    // 1.青池 → 2.黄糸(1/3) → 3.田んぼ → 4.黄糸(2/3) → 5.家族 → 6.黄糸(3/3)
+    // → 7.仏ヶ浦 → 8.青糸(1/3) → 9.青森 → 10.青糸(2/3) → 11.風景 → 12.青糸(3/3)
+    // → 13.赤糸 → 14.緑糸 → 中央
 
     var center = hero.querySelector('.hero-fv__center');
     var animated = false;
+
+    function setupLineMask(svgEl, maskId) {
+      var ns = 'http://www.w3.org/2000/svg';
+      var path = svgEl.querySelector('path');
+      if (!path) return null;
+
+      var len = path.getTotalLength();
+
+      var defs = document.createElementNS(ns, 'defs');
+      svgEl.insertBefore(defs, svgEl.firstChild);
+
+      var mask = document.createElementNS(ns, 'mask');
+      mask.setAttribute('id', maskId);
+      mask.setAttribute('maskUnits', 'userSpaceOnUse');
+
+      var vb = svgEl.getAttribute('viewBox');
+      if (vb) {
+        var parts = vb.split(/[\s,]+/);
+        mask.setAttribute('x', parseFloat(parts[0]) - 50);
+        mask.setAttribute('y', parseFloat(parts[1]) - 50);
+        mask.setAttribute('width', parseFloat(parts[2]) + 100);
+        mask.setAttribute('height', parseFloat(parts[3]) + 100);
+      }
+
+      var mp = document.createElementNS(ns, 'path');
+      mp.setAttribute('d', path.getAttribute('d'));
+      mp.setAttribute('stroke', 'white');
+      mp.setAttribute('stroke-width', '30');
+      mp.setAttribute('fill', 'none');
+      mp.setAttribute('stroke-linecap', 'round');
+      mp.style.strokeDasharray = len;
+      mp.style.strokeDashoffset = len;
+
+      mask.appendChild(mp);
+      defs.appendChild(mask);
+      path.setAttribute('mask', 'url(#' + maskId + ')');
+
+      return { maskPath: mp, totalLen: len };
+    }
+
+    // 糸を一気に連続描画する（止まらない）
+    function drawLineFull(maskPath, totalLen, duration, delay) {
+      setTimeout(function () {
+        maskPath.style.transition = 'stroke-dashoffset ' + duration + 's linear';
+        maskPath.style.strokeDashoffset = '0';
+      }, delay);
+    }
+
+    function showPhoto(sel, delay) {
+      var el = document.querySelector(sel);
+      if (el) {
+        setTimeout(function () { el.classList.add('is-visible'); }, delay);
+      }
+    }
+
+    function runSequence(t) {
+      var lineDur = 2.4;     // 黄・青糸の全体描画時間(秒)
+      var lineDurMs = 2400;
+      var photoInterval = lineDurMs / 3; // 糸の1/3地点ごとに写真表示
+      var photoPause = 400;
+
+      // 黄色い糸のマスク準備 (class=green, color=#F8C743)
+      var yellowSvg = document.querySelector('.hero-fv__line--green');
+      var yellowData = yellowSvg ? setupLineMask(yellowSvg, 'hero-line-mask-yellow') : null;
+
+      // 青い糸のマスク準備
+      var blueSvg = document.querySelector('.hero-fv__line--blue');
+      var blueData = blueSvg ? setupLineMask(blueSvg, 'hero-line-mask-blue') : null;
+
+      // 赤い糸のマスク準備
+      var pinkSvg = document.querySelector('.hero-fv__line--pink');
+      var pinkData = pinkSvg ? setupLineMask(pinkSvg, 'hero-line-mask-pink') : null;
+
+      // 緑の糸のマスク準備 (class=yellow, color=#72B94E)
+      var greenSvg = document.querySelector('.hero-fv__line--yellow');
+      var greenData = greenSvg ? setupLineMask(greenSvg, 'hero-line-mask-green') : null;
+
+      // === 黄色い糸フェーズ ===
+      // 1. 青池
+      showPhoto('.hero-fv__photo--tl', t);
+      t += photoPause;
+
+      // 黄糸を一気に連続描画開始（止まらない）
+      var yellowStart = t;
+      if (yellowData) drawLineFull(yellowData.maskPath, yellowData.totalLen, lineDur, yellowStart);
+
+      // 糸の1/3地点で田んぼ表示
+      showPhoto('.hero-fv__photo--ml', yellowStart + photoInterval);
+
+      // 糸の2/3地点で家族表示
+      showPhoto('.hero-fv__photo--bl', yellowStart + photoInterval * 2);
+
+      // 黄糸描画完了後
+      t = yellowStart + lineDurMs + 200;
+
+      // 7. 仏ヶ浦
+      showPhoto('.hero-fv__photo--br', t);
+      t += photoPause;
+
+      // === 青い糸フェーズ ===
+      // 青糸を一気に連続描画開始（止まらない）
+      var blueStart = t;
+      if (blueData) drawLineFull(blueData.maskPath, blueData.totalLen, lineDur, blueStart);
+
+      // 糸の1/3地点で青森市表示
+      showPhoto('.hero-fv__photo--mr', blueStart + photoInterval);
+
+      // 糸の2/3地点で風景表示
+      showPhoto('.hero-fv__photo--tr', blueStart + photoInterval * 2);
+
+      // 青糸描画完了後
+      t = blueStart + lineDurMs + 200;
+
+      // === 仕上げ ===
+      // 13. 赤い糸（一気に描画）
+      if (pinkData) drawLineFull(pinkData.maskPath, pinkData.totalLen, 1.2, t);
+      t += 1200;
+
+      // 14. 緑の糸（一気に描画）
+      if (greenData) drawLineFull(greenData.maskPath, greenData.totalLen, 1.2, t);
+      t += 1200;
+
+      return t;
+    }
 
     function animateHero() {
       if (animated) return;
       animated = true;
 
-      // Phase 1: 中央コンテンツをフェードイン（0.3秒後、1.4秒かけて表示）
+      var t = runSequence(300);
+
+      // 最後に中央コンテンツをフェードイン
       if (center) {
-        setTimeout(function () { center.classList.add('is-visible'); }, 300);
-      }
-
-      // Phase 2: 写真を反時計回りに順番にフェードイン（中央が表示された後）
-      var photoStart = 2000;
-      photoOrder.forEach(function (sel, i) {
-        var el = document.querySelector(sel);
-        if (el) {
-          setTimeout(function () { el.classList.add('is-visible'); }, photoStart + i * 350);
-        }
-      });
-
-      // Phase 3: SVG線を反時計回りに糸を結ぶように描画（写真の後）
-      // SP(768px以下)ではマスクアニメーション非対応のためスキップ
-      if (window.innerWidth > 768) {
-        var lineStart = photoStart + photoOrder.length * 350 + 800;
-        var ns = 'http://www.w3.org/2000/svg';
-
-        lineOrder.forEach(function (sel, i) {
-          var svgEl = document.querySelector(sel);
-          if (!svgEl) return;
-          var path = svgEl.querySelector('path');
-          if (!path) return;
-
-          var len = path.getTotalLength();
-          var maskId = 'hero-line-mask-' + i;
-
-          // マスク用 defs を作成
-          var defs = document.createElementNS(ns, 'defs');
-          svgEl.insertBefore(defs, svgEl.firstChild);
-
-          var mask = document.createElementNS(ns, 'mask');
-          mask.setAttribute('id', maskId);
-          mask.setAttribute('maskUnits', 'userSpaceOnUse');
-
-          // viewBox からマスク範囲を設定
-          var vb = svgEl.getAttribute('viewBox');
-          if (vb) {
-            var parts = vb.split(/[\s,]+/);
-            mask.setAttribute('x', parseFloat(parts[0]) - 50);
-            mask.setAttribute('y', parseFloat(parts[1]) - 50);
-            mask.setAttribute('width', parseFloat(parts[2]) + 100);
-            mask.setAttribute('height', parseFloat(parts[3]) + 100);
-          }
-
-          // マスク用パス（太い白線でパスを描画→元のダッシュ線を徐々に表示）
-          var mp = document.createElementNS(ns, 'path');
-          mp.setAttribute('d', path.getAttribute('d'));
-          mp.setAttribute('stroke', 'white');
-          mp.setAttribute('stroke-width', '30');
-          mp.setAttribute('fill', 'none');
-          mp.setAttribute('stroke-linecap', 'round');
-          mp.style.strokeDasharray = len;
-          mp.style.strokeDashoffset = len;
-
-          mask.appendChild(mp);
-          defs.appendChild(mask);
-          path.setAttribute('mask', 'url(#' + maskId + ')');
-
-          // 描画アニメーション開始（最後の線は描画速度を速く）
-          var isLast = (i === lineOrder.length - 1);
-          var duration = isLast ? 0.8 : 1.2;
-          var delay = lineStart + i * 400;
-          setTimeout(function () {
-            mp.style.transition = 'stroke-dashoffset ' + duration + 's ease-in-out';
-            mp.style.strokeDashoffset = '0';
-          }, delay);
-        });
+        setTimeout(function () { center.classList.add('is-visible'); }, t + 200);
       }
     }
 

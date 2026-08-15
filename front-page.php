@@ -6,7 +6,7 @@
   <section class="hero-fv">
     <div class="hero-fv__parts">
       <svg class="hero-fv__line hero-fv__line--pink" aria-hidden="true" preserveAspectRatio="none" overflow="visible" viewBox="0 0 262.339 427.163" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M260.839 1.50016C55.8005 27.7072 160.129 226.928 180.385 191.06C202.279 152.29 69.1864 165.907 53.1941 314.208C40.5964 431.029 124.408 451.39 125.739 396.827C127.07 342.264 11.9259 369.732 1.5003 419.481" stroke="#E77084" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8"/></svg>
-      <svg class="hero-fv__line hero-fv__line--blue" aria-hidden="true" preserveAspectRatio="none" overflow="visible" viewBox="0 0 323.412 570.242" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.50038 6.51315C37.9361 -3.70734 85.6092 1.17944 127.09 25.7086C178.941 56.3701 151.063 166.586 227.246 160.703C256.022 158.48 260.85 101.011 218.571 123.113C233.349 154.958 252.075 88.061 213.488 94.4307C149.926 104.923 210.081 201.385 227.739 228.114C245.398 254.842 270.252 331.804 242.972 360.054C215.692 388.304 179.922 353.822 191.728 318.581C203.534 283.341 277.825 311.394 296.228 337.82C314.631 364.247 353.117 515.016 273.894 491.646C194.67 468.276 172.767 526.687 166.227 568.742" stroke="#629ACC" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8"/></svg>
+      <svg class="hero-fv__line hero-fv__line--blue" aria-hidden="true" preserveAspectRatio="none" overflow="visible" viewBox="0 0 323.412 570.242" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M166.227 568.742C172.767 526.687 194.67 468.276 273.894 491.646C353.117 515.016 314.631 364.247 296.228 337.82C277.825 311.394 203.534 283.341 191.728 318.581C179.922 353.822 215.692 388.304 242.972 360.054C270.252 331.804 245.398 254.842 227.739 228.114C210.081 201.385 149.926 104.923 213.488 94.4307C252.075 88.061 233.349 154.958 218.571 123.113C260.85 101.011 256.022 158.48 227.246 160.703C151.063 166.586 178.941 56.3701 127.09 25.7086C85.6092 1.17944 37.9361 -3.70734 1.50038 6.51315" stroke="#629ACC" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8"/></svg>
       <svg class="hero-fv__line hero-fv__line--yellow" aria-hidden="true" preserveAspectRatio="none" overflow="visible" viewBox="0 0 772.501 561.5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.50016 1.50016C188.5 25.5002 -9.99982 238.5 140.5 319C291 399.5 327.331 305.99 558 351.5C743 388 771 545.5 771.001 560" stroke="#72B94E" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8"/></svg>
       <svg class="hero-fv__line hero-fv__line--green" aria-hidden="true" preserveAspectRatio="none" overflow="visible" viewBox="0 0 1169.09 643.864" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M68.595 1.50036C52.2616 9.16702 20.095 34.1004 22.095 72.5004C24.595 120.5 -33.4053 154.5 34.5947 226.5C88.9947 284.1 53.2614 298.167 57.5948 314.5C38.5948 351.667 54.2574 496.705 86.5948 518C189.095 585.5 242.806 628.839 306.095 593.5C404.595 538.5 484.095 683.5 605.595 630.5C727.095 577.5 728.595 559.5 856.095 559.5C983.595 559.5 952.658 590.03 1055.09 570C1144.59 552.5 1167.59 513.5 1167.59 416" stroke="#F8C743" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8"/></svg>
 
@@ -37,7 +37,7 @@
         <img src="<?php echo yuumi_img('hero/catchcopy-concept.png'); ?>" alt="地域に関わる人の想いを やさしくつむぎ、デザインする。" class="hero-fv__catchcopy-img">
         <div class="hero-fv__cta">
           <a href="<?php echo esc_url(home_url('/otameshi/')); ?>" class="btn btn--pink btn--lg btn--round">
-            おためし地域おこし協力隊に<br class="sp-only">申し込む
+            おためし地域おこし<br class="sp-only">協力隊に申し込む
             <span class="btn__chevron"></span>
           </a>
         </div>
@@ -371,7 +371,7 @@
             <div class="faq-item-new__answer" style="max-height:200px;">
               <div class="faq-item-new__a-inner">
                 <span class="faq-item-new__a-label">A</span>
-                <div class="faq-item-new__a-text">サービスごとの詳しいQ&amp;Aは、よくある質問ページにまとめています。</div>
+                <div class="faq-item-new__a-text">本プログラムは、2泊3日でのご参加となります。<br>地域の雰囲気や暮らし、活動内容をゆっくり知っていただけるよう、2泊3日の中で体験や交流の時間を設けています。</div>
               </div>
             </div>
           </div>
@@ -386,22 +386,7 @@
             <div class="faq-item-new__answer">
               <div class="faq-item-new__a-inner">
                 <span class="faq-item-new__a-label">A</span>
-                <div class="faq-item-new__a-text">はい、内容により異なりますので、まずはお問い合わせフォームよりお気軽にご相談ください。</div>
-              </div>
-            </div>
-          </div>
-          <div class="faq-item-new">
-            <div class="faq-item-new__question" role="button" tabindex="0" aria-expanded="false">
-              <div class="faq-item-new__q-left">
-                <span class="faq-item-new__q-label">Q</span>
-                <span class="faq-item-new__q-text">デザインだけの依頼もできますか？</span>
-              </div>
-              <span class="faq-item-new__toggle">＋</span>
-            </div>
-            <div class="faq-item-new__answer">
-              <div class="faq-item-new__a-inner">
-                <span class="faq-item-new__a-label">A</span>
-                <div class="faq-item-new__a-text">はい、デザイン制作のみのご依頼も承っております。まずはお気軽にご相談ください。</div>
+                <div class="faq-item-new__a-text">参加費・宿泊費は基本的にかかりません。<br>現地までの交通費と、期間中の飲食費のみご自身でご負担いただきます。</div>
               </div>
             </div>
           </div>

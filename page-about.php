@@ -55,7 +55,7 @@ get_header(); ?>
           <p>現在は、仲間とともに設立した株式会社LivvyでIT活用や業務改善や、焼き鳥居酒屋「鶏どれ」の経営にも携わっています。 株式会社Livvyや「鶏どれ」での活動についても、こちらからご覧いただけますので、よろしければご覧ください。</p>
         </div>
         <div class="about-profile__links">
-          <a href="https://livvy.co.jp/" class="about-profile__link-btn" target="_blank" rel="noopener noreferrer">株式会社Livvy | Webサイト</a>
+          <a href="https://livvy.jp/" class="about-profile__link-btn" target="_blank" rel="noopener noreferrer">株式会社Livvy | Webサイト</a>
           <a href="https://www.instagram.com/toridore_official.0141/" class="about-profile__link-btn" target="_blank" rel="noopener noreferrer">鶏どれ | Instagram</a>
         </div>
       </div>
