@@ -6605,6 +6605,7 @@ body {
 
 .thanks-box__icon {
   margin-bottom: var(--space-md);
+  text-align: center;
 }
 
 .thanks-box__message {
@@ -11241,6 +11242,27 @@ body {
 
   .related-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* --- Privacy Policy SP --- */
+@media (max-width: 768px) {
+  .privacy-section .single-post__content {
+    padding: 20px;
+    font-size: 14px;
+  }
+
+  .privacy-section .single-post__content h1 {
+    font-size: 20px;
+  }
+
+  .privacy-section .single-post__content h2 {
+    font-size: 16px;
+  }
+
+  .privacy-section .single-post__content p,
+  .privacy-section .single-post__content ul li {
+    font-size: 13px;
   }
 }
 
