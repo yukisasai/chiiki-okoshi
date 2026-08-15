@@ -6605,7 +6605,10 @@ body {
 
 .thanks-box__icon {
   margin-bottom: var(--space-md);
-  text-align: center;
+}
+
+.thanks-box__icon img {
+  margin: 0 auto;
 }
 
 .thanks-box__message {
