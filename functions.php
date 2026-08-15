@@ -407,10 +407,11 @@ function yuumi_cf7_privacy_link($content) {
 }
 add_filter('wpcf7_form_elements', 'yuumi_cf7_privacy_link');
 
-// Fix CF7 form output: remove line breaks inside HTML tags to prevent broken class names
+// Fix CF7 form output: remove line breaks inside quoted attribute values to prevent broken class names
 function yuumi_fix_cf7_line_breaks($content) {
-    $content = preg_replace_callback('/<[^>]+>/', function($match) {
-        return preg_replace('/\s+/', ' ', $match[0]);
+    // Remove newlines/tabs inside quoted attribute values (e.g. class="form-label__require\nd" → class="form-label__required")
+    $content = preg_replace_callback('/(?<==["\'])[^"\']*(?=["\'])/', function($match) {
+        return preg_replace('/[\r\n\t]+/', '', $match[0]);
     }, $content);
     return $content;
 }
@@ -948,6 +949,35 @@ function yuumi_post_save_meta($post_id) {
     update_post_meta($post_id, 'post_sections', wp_json_encode($sections, JSON_UNESCAPED_UNICODE));
 }
 add_action('save_post', 'yuumi_post_save_meta');
+
+// --- Auto-create Thanks page ---
+function yuumi_setup_thanks_page() {
+    if (get_option('yuumi_thanks_created')) return;
+
+    $existing = get_posts([
+        'post_type'      => 'page',
+        'name'           => 'thanks',
+        'posts_per_page' => 1,
+        'post_status'    => 'publish',
+    ]);
+    if ($existing) {
+        update_option('yuumi_thanks_created', true);
+        return;
+    }
+
+    $page_id = wp_insert_post([
+        'post_type'    => 'page',
+        'post_title'   => 'お問い合わせ完了',
+        'post_name'    => 'thanks',
+        'post_content' => '',
+        'post_status'  => 'publish',
+    ]);
+
+    if ($page_id && !is_wp_error($page_id)) {
+        update_option('yuumi_thanks_created', true);
+    }
+}
+add_action('init', 'yuumi_setup_thanks_page');
 
 // --- Auto-create Privacy Policy page ---
 function yuumi_setup_privacy_page() {
